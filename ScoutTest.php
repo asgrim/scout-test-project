@@ -8,7 +8,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Scoutapm\Agent;
-use Scoutapm\Events\Request;
 
 class ScoutTest
 {
@@ -26,13 +25,9 @@ class ScoutTest
         $agent->connect();
 
         $agent->webTransaction('Yay', function () use ($agent) {
-            sleep(2);
-
             $agent->instrument('test', 'foo', function () {
-                sleep(1);
             });
             $agent->instrument('test', 'foo2', function () {
-
             });
             $agent->tagRequest('testtag', '1.23');
         });
